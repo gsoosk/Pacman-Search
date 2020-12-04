@@ -20,13 +20,13 @@ sns.set()
 ```
 
 ## Reading from Files 
-At first we create a class for reading from inputs(file / string of map). 
-In this code we read from files and make a class to represent pacman world. These class have some methods :
-* to read from input file
-* to convert 1d position to it's 2d position in map.
-* to convert 2d position to it's 1d position
-* to check state of our world and see that it is goal state or not
-* to find and store agent positions
+At first, we create a class for reading from inputs(file / string of map). 
+In this code we will read from files and make a class to represent the pacman world. These classes have some methods in order to:
+* read from input file
+* convert 1d position to it's 2d position in map.
+* convert 2d position to it's 1d position
+* check state of our world and see that it is goal state or not
+* find and store agent positions
 
 
 ```python
@@ -94,14 +94,14 @@ print(f'Agent P position is {world.p_i}, {world.p_j} and Agent Q position is {wo
     Agent P position is 3, 4 and Agent Q position is 8, 4
 
 
-**IN** this class, I didn't change map data from string to other data structures like 2d array. Because it got more time to find agents and other processes.  
+**IN** this class, I didn't convert map data from string to other data structures like 2d array. This is because it takes more time to find agents and other processes.  
 
 ## Uninformed Search
 
 ### Creating Uninformed Pacman World
-In this kind of solution, our world is a little difference from first definition of `PacmanWorld`. We should get all feasible actions which every agent can make; therefore, we define a new world for this kind of solution which inherited our first world.
+In this kind of solution, our world is a little different from first definition of `PacmanWorld`. We should get all feasible actions in which every agent can make; therefore, we define a new world for this kind of solution which inherited our first world.
 
-This class has a main method named `get_feasible_actions` which got all agent P and agent Q actions that they can made. It uses other methods (like `move` and `check_pos`) to implement this goal. 
+This class has a main method named `get_feasible_actions` which gets all agent P and agent Q's actions that they can made. It uses other methods (like `move` and `check_pos`) to implement it. 
 
 
 ```python
@@ -146,7 +146,7 @@ class UninformedPacmanWorld(PacmanWorld):
 ui_world = UninformedPacmanWorld('./tests/test1', file=True)
 ```
 
-With this class we can get all possible actions like this :
+With this class we can get all possible actions. For instance:
 
 
 ```python
@@ -214,10 +214,10 @@ for e in ui_world.get_feasible_actions():
 ### BFS
 
 
-For running `BFS` algorithm at first we make our test world (here I used `ui_world` which ran test1 as initial world). 
-Then our algorithm started to run. 
+For running `BFS` algorithm, at first, we make our test world (here I used `ui_world` which ran test1 as initial world). 
+Then our algorithm will start. 
 
-This algorithm has a queue as it's frontier and a set as it's explored. 
+This algorithm has a queue as its frontier and a set as its explored. 
 * At first we add intial state into frontier and then pop it from the queue. 
 * Then all possible actions from initial values which does not explored before, will add to the frontier 
 * and next we will redo these steps until we find goal state.
@@ -298,11 +298,12 @@ print(f'Number of moves to got the answer is {moves}')
     Number of moves to got the answer is 33
 
 
-As you see this algorithm has a small execution time for this number of state. At my first try, it had more execution time and I started to change my data structures into string instead of 2d array. This move save a lot of time for me in this algorithm. 
+As you see, this algorithm has a small execution time for this number of states. In my first try, it had more execution time and I started to change my data structures into string instead of 2d array. This action has saved a lot of time in this algorithm. 
 
 ### IDS
 
-For running `IDS` algorithm at first we make class named `ExploredNode` to add into explored set. Why we make this class? because in ids algorithm it is possible to see a repeated state but in less depth; therefore, we should add depth also in explored set. But if we just use a tuple in set we should explore a lots of more paths. We should just adds nodes which have less depth not all nodes with different depth. In that situation our execution time got more.
+For running `IDS` algorithm we will make a class named `ExploredNode` to add into explored set. 
+Why we make this class? because in ids algorithm it is possible to see a repeated state but in less depth; therefore, we should add depth also in explored set. However, if we just use a tuple in the set we should explore much of more path. We should just add nodes which have less depth, not all nodes with different depth. In that situation our execution time will get more.
 
 
 
@@ -338,15 +339,15 @@ ExploredNode(10, 'a') in s
 
 
 
-In `IDS` algorithm, at first we make our test world (here I used `ui_world` which ran test1 as initial world). 
+In `IDS` algorithm, at first, we make our test world (here I used `ui_world` which runs test1 as initial world). 
 Then our algorithm started to run. 
 
-This algorithm has a stack as it's frontier (we used dequeue data structre and it's pop method) and a set (set of `ExploredNode`) as it's explored. 
-* We have a loop to increas depth in every iteration of it. Actualy at every iteration we increase depth and run inner loop which is a limited dfs. 
+This algorithm has a stack as its frontier (we used dequeue data structre and its pop method) and a set (set of `ExploredNode`) as its explored. 
+* We have a loop to increase depth in every iteration of it. Actually. at every iteration, we increase depth and run inner loop which is a limited dfs. 
 * At every itteration we reset all of data structures to initial values.
 * In limited dfs : 
     * We pop first node from stack
-    * If it's depth is our limit we didn't add it's children to frontier
+    * If its depth is our limit we didn't add its children to frontier
     * Else we add chidlren to frontier
 
 This `IDS` is an optimal search algotrithm.
@@ -536,10 +537,10 @@ $$
 $$
 
 ### Astar Search
-This algorithm is very similar to `BFS` algorithm, but it uses a priority queue as it's frontier instead. At first we make our test world (here I used `ui_world` which ran test1 as initial world). 
+This algorithm is very similar to `BFS` algorithm, but it uses a priority queue as its frontier instead. At first we make our test world (here I used `ui_world` which ran test1 as initial world). 
 Then our algorithm started to run. 
 
-This algorithm has a priority queue as it's frontier and a set as it's explored. It also use f(state) which is h(s) + cost_to(s) as priority of every node in queue.
+This algorithm has a priority queue as its frontier and a set as its explored. It also use f(state) which is h(s) + cost_to(s) as priority of every node in queue.
 * At first we add intial state into frontier and then pop it from the queue. 
 * Then all possible actions from initial values which does not explored before, will add to the frontier 
 * and next we will redo these steps until we find goal state.
@@ -988,10 +989,10 @@ all_tables[4]
 ### Comparing Algorithms 
 
 #### Optimality
-All of these algorithms return optimal answers. BFS is optimal because we move in depth. IDS is optimal too because we limit depth of DFS. In A* if we have an admissable and consistent heuristic, we can say it is an optimal algorithm. Here we have a heueristic with these charactrastics which proven above.  
+All of these algorithms return optimal answers. BFS is optimal since we move in depth. IDS is optimal too. This is because we limit depth of DFS. In A* if we have an admissable and consistent heuristic, we can say it is an optimal algorithm. Here we have a heueristic with these charactrastics which has been proven above.  
 
 #### Time Complexity
-For `BFS` if we assume that we have b-ary tree of depth d time compelxity is number of nodes in that which is $O(b^d)$.
+For `BFS` if we assume that we have b-ary tree of the depth d, time compelxity is number of nodes in that which is $O(b^d)$.
 
 For `IDS` Because of we have limited depth first search we should have time complexity of every itteration. So time complexity is $O((d+1)b^0 + d b^1 + (d-1)b^2 + … + b^d)$.
 
@@ -1000,7 +1001,7 @@ For `A*Search` time complexity is number of nodes which heuristic expands.
 As you see in above tables time order is  $IDS \gt A^* \gt BFS$. Altough number of seen states is in $IDS \gt BFS \gt A^*$ but time of A* is a little more than bfs. it is because of **computing heuristic** overheads. For bigger maps which this overhead can be ignored we can say time of A* is less than BFS; on the other hand, IDS have a lot of more time complexity in this problem. Becasue we have a big depth for solotiouns. It is always slower than BFS and A*.
 
 #### Space Complexity
-Space complexity of `BFS` is like it's time complexity which is number of it nodes. ( $O(b^d)$ ).
+Space complexity of `BFS` is like its time complexity which is number of it nodes. ( $O(b^d)$ ).
 
 `IDS` have less space for computing. It have an space complexity of $O(bd)$ and its why people use IDS instead of BFS.
 
